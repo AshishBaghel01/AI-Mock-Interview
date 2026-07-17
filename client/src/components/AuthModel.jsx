@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { motion as Motion } from 'motion/react'
 import { useSelector } from 'react-redux'
 import { FaTimes } from "react-icons/fa";
-import Auth from '../pages/auth';
+import Auth from '../pages/Auth';
 
 function AuthModel({onClose}) {
     const {userData} = useSelector((state)=>state.user)
