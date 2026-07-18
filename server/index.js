@@ -10,10 +10,27 @@ import interviewRouter from "./routes/interview.route.js"
 import paymentRouter from "./routes/payment.route.js"
 
 const app = express()
-app.use(cors({
-    origin: process.env.CORS_ORIGIN || true,
+
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://ai-mock-interview-ash.onrender.com",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-}));
+  })
+);
 
 app.use(express.json())
 app.use(cookieParser())
