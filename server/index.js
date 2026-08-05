@@ -11,10 +11,17 @@ import paymentRouter from "./routes/payment.route.js"
 const app = express()
 
 
-const allowedOrigins = [
+const defaultAllowedOrigins = [
   "http://localhost:5173",
   "https://ai-mock-interview-ash.onrender.com",
 ];
+
+const configuredOrigins = (process.env.CLIENT_URLS || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const allowedOrigins = [...new Set([...defaultAllowedOrigins, ...configuredOrigins])];
 
 app.use(
   cors({

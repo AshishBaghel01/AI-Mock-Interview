@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsRobot } from "react-icons/bs";
 import { IoSparkles } from "react-icons/io5";
 import { motion } from "motion/react"
@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/userSlice';
 function Auth({isModel = false}) {
     const dispatch = useDispatch()
+    const [authError, setAuthError] = useState("")
 
     const completeGoogleLogin = async (user) => {
         try {
@@ -41,11 +42,19 @@ function Auth({isModel = false}) {
     }, [dispatch])
 
     const handleGoogleAuth = async () => {
+        setAuthError("")
         try {
             const response = await signInWithPopup(auth, provider)
             await completeGoogleLogin(response.user)
         } catch (error) {
             console.error("Popup auth failed:", error)
+            if (error?.code === "auth/unauthorized-domain") {
+                setAuthError(
+                    `Google sign-in is not enabled for ${window.location.hostname}. Add this domain in Firebase Authentication before trying again.`
+                )
+                return
+            }
+
             const shouldRedirect =
                 error?.code?.includes("popup-closed-by-user") ||
                 error?.code?.includes("popup-blocked") ||
@@ -108,6 +117,11 @@ function Auth({isModel = false}) {
 
    
             </motion.button>
+            {authError && (
+                <p role='alert' className='mt-4 text-center text-sm text-red-600'>
+                    {authError}
+                </p>
+            )}
         </motion.div>
 
       
