@@ -48,12 +48,7 @@ function Auth({isModel = false}) {
             await completeGoogleLogin(response.user)
         } catch (error) {
             console.error("Popup auth failed:", error)
-            if (error?.code === "auth/unauthorized-domain") {
-                setAuthError(
-                    `Google sign-in is not enabled for ${window.location.hostname}. Add this domain in Firebase Authentication before trying again.`
-                )
-                return
-            }
+            
 
             const shouldRedirect =
                 error?.code?.includes("popup-closed-by-user") ||
