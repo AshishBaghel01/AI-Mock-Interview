@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BsRobot } from "react-icons/bs";
 import { IoSparkles } from "react-icons/io5";
 import { motion } from "motion/react"
 import { FcGoogle } from "react-icons/fc";
-import { signInWithPopup } from 'firebase/auth';
+import { getRedirectResult, signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { auth, provider } from '../utils/firebase';
 import axios from 'axios';
 import { ServerUrl } from '../App';
@@ -12,21 +12,53 @@ import { setUserData } from '../redux/userSlice';
 function Auth({isModel = false}) {
     const dispatch = useDispatch()
 
+    const completeGoogleLogin = async (user) => {
+        try {
+            if (!user) return
+            const name = user.displayName
+            const email = user.email
+            const result = await axios.post(ServerUrl + "/api/auth/google", { name, email }, { withCredentials: true })
+            dispatch(setUserData(result.data))
+        } catch (error) {
+            console.error("Backend login failed:", error)
+            dispatch(setUserData(null))
+        }
+    }
+
+    useEffect(() => {
+        const processRedirectResult = async () => {
+            try {
+                const result = await getRedirectResult(auth)
+                if (result?.user) {
+                    await completeGoogleLogin(result.user)
+                }
+            } catch (error) {
+                console.error("Redirect auth failed:", error)
+            }
+        }
+
+        void processRedirectResult()
+    }, [dispatch])
+
     const handleGoogleAuth = async () => {
         try {
-            const response = await signInWithPopup(auth,provider)
-            let User = response.user
-            let name = User.displayName
-            let email = User.email
-            const result = await axios.post(ServerUrl + "/api/auth/google" , {name , email} , {withCredentials:true})
-            dispatch(setUserData(result.data))
-            
-
-
-            
+            const response = await signInWithPopup(auth, provider)
+            await completeGoogleLogin(response.user)
         } catch (error) {
-            console.log(error)
-              dispatch(setUserData(null))
+            console.error("Popup auth failed:", error)
+            const shouldRedirect =
+                error?.code?.includes("popup-closed-by-user") ||
+                error?.code?.includes("popup-blocked") ||
+                error?.message?.includes("Cross-Origin-Opener-Policy") ||
+                error?.message?.includes("window.closed") ||
+                error?.code?.includes("auth/operation-not-supported-in-this-environment")
+
+            if (shouldRedirect) {
+                await signInWithRedirect(auth, provider)
+                return
+            }
+
+            dispatch(setUserData(null))
         }
     }
   return (

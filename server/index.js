@@ -1,8 +1,7 @@
+import "./config/env.js"
 import express from "express"
-import dotenv from "dotenv"
 import connectDb from "./config/connectDb.js"
 import cookieParser from "cookie-parser"
-dotenv.config()
 import cors from "cors"
 import authRouter from "./routes/auth.route.js"
 import userRouter from "./routes/user.route.js"
@@ -43,10 +42,15 @@ app.use("/api/payment" , paymentRouter)
 const PORT = process.env.PORT || 6000
 
 const startServer = async () => {
+  try {
     await connectDb()
     app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`)
+      console.log(`Server running on port ${PORT}`)
     })
+  } catch (error) {
+    console.error(`Server failed to start: ${error.message}`)
+    process.exitCode = 1
+  }
 }
 
-startServer()
+void startServer()
