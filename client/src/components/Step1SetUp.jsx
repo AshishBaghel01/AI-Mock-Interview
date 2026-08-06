@@ -49,7 +49,9 @@ function Step1SetUp({ onStart }) {
             setAnalyzing(false);
 
         } catch (error) {
-            console.log(error)
+            const message = error.response?.data?.message || "Unable to analyze the resume. Please try again.";
+            console.error(message, error);
+            alert(message);
             setAnalyzing(false);
         }
     }
