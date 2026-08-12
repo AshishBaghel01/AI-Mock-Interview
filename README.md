@@ -50,11 +50,6 @@ AI-Mock-Interview/
 - A Firebase project with Google Authentication enabled
 - An OpenRouter API key
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/AshishBaghel01/AI-Mock-Interview.git
-cd AI-Mock-Interview
 ```
 
 ### 2. Install dependencies
