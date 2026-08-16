@@ -329,10 +329,10 @@ setIsSubmitting(false)
 
   return (
     <div className='min-h-screen flex items-center justify-center p-4 sm:p-6'>
-          <div className='w-full max-w-350 min-h-[80vh] bg-white rounded-3xl shadow-2xl border border-gray-200 flex flex-col lg:flex-row overflow-hidden'>
+          <div className='w-full max-w-350 min-h-[80vh] border border-[#292e45] bg-gradient-to-br from-[#253666] to-[#10172f] rounded-3xl shadow-2xl border border-gray-200 flex flex-col lg:flex-row overflow-hidden'>
 
         {/* video section */}
-        <div className='w-full lg:w-[35%] bg-white flex flex-col items-center p-6 space-y-6 border-r border-gray-200'>
+        <div className='w-full lg:w-[35%] border border-[#292e45] bg-gradient-to-br from-[#253562] to-[#0b1020] flex flex-col items-center p-6 space-y-6 border-r border-gray-200'>
           <div className='w-full max-w-md rounded-2xl overflow-hidden shadow-xl'>
             <video
               src={videoSource}
@@ -409,7 +409,7 @@ setIsSubmitting(false)
             placeholder="Type your answer here..."
             onChange={(e) => setAnswer(e.target.value)}
             value={answer}
-            className="flex-1 bg-gray-100 p-4 sm:p-6 rounded-2xl resize-none outline-none border border-gray-200 focus:ring-2 focus:ring-green-500 transition text-gray-800" />
+            className="flex-1 bg-gray-100 p-4 sm:p-6 rounded-2xl resize-none outline-none border border-gray-200 focus:ring-2 focus:ring-green-600 transition text-gray-800" />
 
 
          {!feedback ? ( <div className='flex items-center gap-4 mt-6'>
@@ -424,7 +424,7 @@ setIsSubmitting(false)
             onClick={submitAnswer}
             disabled={isSubmitting}
               whileTap={{ scale: 0.95 }}
-              className='flex-1 bg-green-500 text-white py-3 sm:py-4 rounded-2xl shadow-lg hover:opacity-90 transition font-semibold disabled:bg-gray-500'>
+              className='flex-1 bg-green-700 text-white py-3 sm:py-4 rounded-2xl shadow-lg hover:opacity-90 transition font-semibold disabled:bg-gray-500'>
               {isSubmitting?"Submitting...":"Submit Answer"}
 
             </motion.button>
@@ -439,7 +439,7 @@ setIsSubmitting(false)
               <button
               onClick={handleNext}
 
-               className='w-full bg-green-500 text-white py-3 rounded-xl shadow-md hover:opacity-90 transition flex items-center justify-center gap-1'>
+               className='w-full bg-green-700 text-white py-3 rounded-xl shadow-md hover:opacity-90 transition flex items-center justify-center gap-1'>
                 Next Question <BsArrowRight size={18}/>
               </button>
 

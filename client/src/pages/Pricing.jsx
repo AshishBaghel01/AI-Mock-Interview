@@ -117,10 +117,10 @@ function Pricing() {
         </button>
 
         <div className="text-center w-full">
-          <h1 className="text-4xl font-bold text-gray-800">
+          <h1 className="text-4xl font-bold text-gray-200">
             Choose Your Plan
           </h1>
-          <p className="text-gray-500 mt-3 text-lg">
+          <p className="text-gray-300 mt-3 text-lg">
             Flexible pricing to match your interview preparation goals.
           </p>
         </div>
@@ -204,7 +204,7 @@ function Pricing() {
                     }
                   }} className={`w-full mt-8 py-3 rounded-xl font-semibold transition ${isSelected
                     ? "bg-green-500 text-white hover:opacity-90"
-                    : "bg-gray-100 text-gray-700 hover:bg-green-50"
+                    : "bg-gray-300 text-gray-700 hover:bg-gray-500"
                     }`}>
                   {loadingPlan === plan.id
                     ? "Processing..."

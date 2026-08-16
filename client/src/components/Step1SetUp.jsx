@@ -85,13 +85,13 @@ function Step1SetUp({ onStart }) {
                     initial={{ x: -80, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.7 }}
-                    className='relative bg-green-50 p-12 flex flex-col justify-center'>
+                    className='relative bg-gradient-to-br from-[#313e64] to-[#0b1020] p-12 flex flex-col justify-center'>
 
-                    <h2 className="text-4xl font-bold text-gray-800 mb-6">
+                    <h2 className="text-4xl font-bold text-white  mb-6">
                         Start Your AI Interview
                     </h2>
 
-                    <p className="text-gray-600 mb-10">
+                    <p className="text-gray-200 mb-10">
                         Practice real interview scenarios powered by AI.
                         Improve communication, technical skills, and confidence.
                     </p>
@@ -137,9 +137,9 @@ function Step1SetUp({ onStart }) {
                     initial={{ x: 80, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.7 }}
-                    className="p-12 bg-white">
+                    className="p-12 bg-gradient-to-br from-[#0b1122] to-[#2b365c]">
 
-                    <h2 className='text-3xl font-bold text-gray-800 mb-8'>
+                    <h2 className='text-3xl font-bold text-gray-100 mb-8'>
                         Interview SetUp
                     </h2>
 
@@ -147,7 +147,7 @@ function Step1SetUp({ onStart }) {
                     <div className='space-y-6'>
 
                         <div className='relative'>
-                            <FaUserTie className='absolute top-4 left-4 text-gray-400' />
+                            <FaUserTie className='absolute top-4 left-4 text-gray-100' />
 
                                 <input type='text' placeholder='Enter role'
                                 className='w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-700 outline-none transition'
@@ -156,7 +156,7 @@ function Step1SetUp({ onStart }) {
 
 
                         <div className='relative'>
-                            <FaBriefcase className='absolute top-4 left-4 text-gray-400' />
+                            <FaBriefcase className='absolute top-4 left-4 text-gray-100' />
 
                             <input type='text' placeholder='Experience (e.g. 2 years)'
                                 className='w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-600 outline-none transition'
@@ -181,7 +181,7 @@ function Step1SetUp({ onStart }) {
                                 onClick={() => document.getElementById("resumeUpload").click()}
                                 className='border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-grayn-600 hover:bg-gray-800 transition'>
 
-                                <FaFileUpload className='text-4xl mx-auto text-green-600 mb-3' />
+                                <FaFileUpload className='text-4xl mx-auto text-green-500 mb-3' />
 
                                 <input type="file"
                                     accept="application/pdf"
@@ -189,7 +189,7 @@ function Step1SetUp({ onStart }) {
                                     className='hidden'
                                     onChange={(e) => setResumeFile(e.target.files[0])} />
 
-                                <p className='text-gray-600 font-medium'>
+                                <p className='text-gray-500 font-medium'>
                                     {resumeFile ? resumeFile.name : "Click to upload resume (Optional)"}
                                 </p>
 

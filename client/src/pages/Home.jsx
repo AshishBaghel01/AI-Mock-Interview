@@ -1,314 +1,234 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { motion } from "motion/react";
-import {
-  BsRobot,
-  BsMic,
-  BsClock,
-  BsBarChart,
-  BsFileEarmarkText
-} from "react-icons/bs";
-import { HiSparkles } from "react-icons/hi";
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import AuthModel from '../components/AuthModel';
-import hrImg from "../assets/HR.png";
-import techImg from "../assets/tech.png";
-import confidenceImg from "../assets/confi.png";
-import creditImg from "../assets/credit.png";
-import evalImg from "../assets/ai-ans.png";
-import resumeImg from "../assets/resume.png";
-import pdfImg from "../assets/pdf.png";
-import analyticsImg from "../assets/history.png";
-import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom'
+import { motion as Motion } from 'motion/react'
+import { BsArrowRight, BsBarChart, BsFileEarmarkText, BsGraphUpArrow, BsMic, BsPerson, BsPlayCircle, BsRobot, BsStars, BsStopwatch, BsTrophy } from 'react-icons/bs'
+import { HiSparkles } from 'react-icons/hi'
+import AuthModel from '../components/AuthModel'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import frontLady from '../assets/frontLady.png'
+import hrImg from '../assets/HR.png'
+import techImg from '../assets/tech.png'
+import confidenceImg from '../assets/confi.png'
+import creditImg from '../assets/credit.png'
 
+const features = [
+  { icon: <BsPerson />, title: 'Role & Experience Selection', text: 'AI adapts questions based on your role and experience level.', tone: 'purple' },
+  { icon: <BsMic />, title: 'Smart Voice Interview', text: 'Practice with voice or text responses for a more realistic experience.', tone: 'violet' },
+  { icon: <BsStopwatch />, title: 'Timer Based Simulation', text: 'Real interview pressure with time tracking and auto next question.', tone: 'blue' },
+  { icon: <BsRobot />, title: 'AI Answer Evaluation', text: 'Get instant, detailed feedback with accuracy, relevance and clarity score.', tone: 'green' },
+  { icon: <BsFileEarmarkText />, title: 'Resume Based Interview', text: 'Upload your resume and get personalized interview questions.', tone: 'orange' },
+  { icon: <BsBarChart />, title: 'Performance Analytics', text: 'Track your progress with insights and improvement suggestions.', tone: 'pink' },
+]
+
+const modes = [
+  { image: hrImg, title: 'HR Interview Mode', text: 'Behavioral & communication based questions.', action: 'Start Now', tone: 'purple' },
+  { image: techImg, title: 'Technical Mode', text: 'Subject & role specific technical questions.', action: 'Start Now', tone: 'green' },
+  { image: confidenceImg, title: 'Confidence Detection', text: 'Analyze your tone, pace & confidence in real-time.', action: 'Start Now', tone: 'blue' },
+  { image: creditImg, title: 'Credit System', text: 'Use credits per interview. Earn more by inviting friends.', action: 'Explore', tone: 'orange' },
+]
+
+const toneMap = {
+  purple: 'bg-gradient-to-br from-[#963dff] to-[#412aa9] text-white',
+  violet: 'bg-gradient-to-br from-[#d448ff] to-[#64209f] text-white',
+  blue: 'bg-gradient-to-br from-[#3499ff] to-[#314bcb] text-white',
+  green: 'bg-gradient-to-br from-[#21d88f] to-[#097050] text-white',
+  orange: 'bg-gradient-to-br from-[#ffb120] to-[#d86000] text-white',
+  pink: 'bg-gradient-to-br from-[#ff5fa4] to-[#8d1d6c] text-white',
+}
+
+const modeTextMap = {
+  purple: 'text-[#c15bff]',
+  green: 'text-[#1ee58f]',
+  blue: 'text-[#4a9aff]',
+  orange: 'text-[#ffae16]',
+}
 
 function Home() {
   const { userData } = useSelector((state) => state.user)
-  const [showAuth, setShowAuth] = useState(false);
   const navigate = useNavigate()
+  const [showAuth, setShowAuth] = useState(false)
+  const startInterview = () => (userData ? navigate('/interview') : setShowAuth(true))
+  const openHistory = () => (userData ? navigate('/history') : setShowAuth(true))
+
   return (
-    <div className='min-h-screen flex flex-col'>
+    <div className="min-h-full overflow-hidden bg-[radial-gradient(circle_at_76%_20%,rgba(53,17,109,0.27),transparent_24%)] text-white">
       <Navbar />
 
-      <div className='flex-1 px-6 py-20'>
-        <div className='max-w-6xl mx-auto'>
-
-          <div className='flex justify-center mb-6'>
-            <div className='bg-gray-100 text-gray-600 text-sm px-4 py-2 rounded-full flex items-center gap-2'>
-              <HiSparkles size={16} className="bg-green-50 text-green-600" />
-              AI Powered Smart Interview Platform
+      <main className="mx-auto max-w-[1550px] px-4 pb-5 pt-4 sm:px-6 lg:px-8">
+        <section className="grid min-h-[495px] items-center gap-14 px-1 py-8 lg:grid-cols-[1fr_1.06fr]">
+          <div className="max-w-[560px]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#7722bb66] bg-[#791de91a] px-4 py-2 text-[13px] text-[#dda9ff]">
+              <HiSparkles className="text-[#c74bff]" />
+              AI-Powered Interview Platform
             </div>
 
-
-          </div>
-          <div className='text-center mb-28'>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+            <Motion.h1
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className='text-4xl md:text-6xl font-semibold leading-tight max-w-4xl mx-auto'>
-              Practice Interviews with
-              <span className='relative inline-block'>
-                <span className='bg-green-100 text-green-600 px-5 py-1 rounded-full'>
-                  AI Intelligence
+              transition={{ duration: 0.45 }}
+              className="mt-6 text-5xl font-semibold leading-[1.22] tracking-[-1.8px] text-white md:text-[70px]"
+            >
+              Practice Smarter.
+              <br />
+              Get <span className="bg-gradient-to-r from-[#ba42ff] to-[#407aff] bg-clip-text text-transparent">Hired Faster.</span>
+            </Motion.h1>
 
-                </span>
-              </span>
+            <p className="mt-4 max-w-[520px] text-[15px] leading-8 text-[#c5c7d4]">
+              Realistic AI mock interviews with smart feedback, voice interaction and performance analytics to help you crack your dream job.
+            </p>
 
+            <div className="mt-8 flex flex-wrap gap-4">
+              <button
+                className="inline-flex items-center gap-3 rounded-xl border-0 bg-gradient-to-r from-[#8c21ed] to-[#4a8aff] px-6 py-5 text-[17px] font-semibold text-white shadow-[0_10px_25px_rgba(86,36,168,0.29)]"
+                onClick={startInterview}
+              >
+                Start Practice Now <BsArrowRight />
+              </button>
 
+            
+            </div>
 
-            </motion.h1>
+            <div className="mt-9 flex items-center gap-4">
+              <div className="flex items-center">
+                {[BsPerson, BsPerson, BsPerson, BsPerson].map((Icon, index) => (
+                  <span
+                    key={index}
+                    className="mr-[-7px] grid h-9 w-9 place-items-center rounded-full border-2 border-[#111526] bg-[#dfd2c2] text-base text-[#111826] last:mr-0"
+                  >
+                    <Icon />
+                  </span>
+                ))}
+                <b className="ml-1 grid h-9 w-9 place-items-center rounded-full border-2 border-[#111526] bg-[#20253a] text-[11px] font-bold text-white">
+                  1K+
+                </b>
+              </div>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className='text-gray-500 mt-6 max-w-2xl mx-auto text-lg'>
-              Role-based mock interviews with smart follow-ups,
-              adaptive difficulty and real-time performance evaluation.
-
-            </motion.p>
-
-            <div className='flex flex-wrap justify-center gap-4 mt-10'>
-              <motion.button
-                onClick={() => {
-                  if (!userData) {
-                    setShowAuth(true)
-                    return;
-                  }
-                  navigate("/interview")
-                }}
-                whileHover={{ opacity: 0.9, scale: 1.03 }}
-                whileTap={{ opacity: 1, scale: 0.98 }}
-                className='bg-black text-white px-10 py-3 rounded-full hover:opacity-90 transition shadow-md'>
-                Start Interview
-
-              </motion.button>
-
-              <motion.button
-                onClick={() => {
-                  if (!userData) {
-                    setShowAuth(true)
-                    return;
-                  }
-                  navigate("/history")
-                }}
-                whileHover={{ opacity: 0.9, scale: 1.03 }}
-                whileTap={{ opacity: 1, scale: 0.98 }}
-                className='border border-gray-150 px-10 py-3 rounded-full hover:bg-greay-700 transition'>
-                View History
-
-              </motion.button>
+              <p className="text-[13px] leading-5 text-[#c5c7d4]">
+                Join 1,000+ successful candidates
+                <br />
+                <small className="text-[#a6aaba] text-[12px] ">improving every day</small>
+              </p>
             </div>
           </div>
 
-          <div className='flex flex-col md:flex-row justify-center items-center gap-10 mb-28'>
-            {
-              [
-                {
-                  icon: <BsRobot size={24} />,
-                  step: "STEP 1",
-                  title: "Role & Experience Selection",
-                  desc: "AI adjusts difficulty based on selected job role."
-                },
-                {
-                  icon: <BsMic size={24} />,
-                  step: "STEP 2",
-                  title: "Smart Voice Interview",
-                  desc: "Dynamic follow-up questions based on your answers."
-                },
-                {
-                  icon: <BsClock size={24} />,
-                  step: "STEP 3",
-                  title: "Timer Based Simulation",
-                  desc: "Real interview pressure with time tracking."
-                }
-              ].map((item, index) => (
-                <motion.div key={index}
-                  initial={{ opacity: 0, y: 60 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 + index * 0.2 }}
-                  whileHover={{ rotate: 0, scale: 1.06 }}
+          <div className="relative">
+            <div className="relative h-[465px] overflow-hidden rounded-[25px] border border-[#566074] bg-[#30303c]">
+              <div className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-full border border-white/10 bg-[#20212ac7] px-3 py-2 text-sm font-semibold text-white backdrop-blur-md">
+                <BsStars /> AI Interviewer
+              </div>
 
-                  className={`
-        relative bg-white rounded-3xl border-2 border-green-100 
-        hover:border-green-500 p-10 w-80 max-w-[90%] shadow-md hover:shadow-2xl 
-        transition-all duration-300
-        ${index === 0 ? "rotate-[-4deg]" : ""}
-        ${index === 1 ? "rotate-[3deg] md:-mt-6 shadow-xl" : ""}
-        ${index === 2 ? "rotate-[-3deg]" : ""}
-      `}>
+              <img src={frontLady} alt="AI interviewer" className="h-full w-full object-cover object-center" />
 
-                  <div className='absolute -top-8 left-1/2 -translate-x-1/2 bg-white border-2 border-green-500 text-green-600 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg'>
-                    {item.icon}</div>
-                  <div className='pt-10 text-center'>
-                    <div className='text-xs text-green-600 font-semibold mb-2 tracking-wider'>{item.step}</div>
-                    <h3 className='font-semibold mb-3 text-lg'>{item.title}</h3>
-                    <p className='text-sm text-gray-500 leading-relaxed'>{item.desc}</p>
-                  </div>
-
-
-                </motion.div>
-              ))
-            }
-          </div>
-
-
-          <div className='mb-32'>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className='text-4xl font-semibold text-center mb-16'>
-              Advanced AI{" "}
-              <span className="text-green-600">Capabilities</span>
-
-            </motion.h2>
-
-            <div className='grid md:grid-cols-2 gap-10'>
-              {
-                [
-                  {
-                    image: evalImg,
-                    icon: <BsBarChart size={20} />,
-                    title: "AI Answer Evaluation",
-                    desc: "Scores communication, technical accuracy and confidence."
-                  },
-                  {
-                    image: resumeImg,
-                    icon: <BsFileEarmarkText size={20} />,
-                    title: "Resume Based Interview",
-                    desc: "Project-specific questions based on uploaded resume."
-                  },
-                  {
-                    image: pdfImg,
-                    icon: <BsFileEarmarkText size={20} />,
-                    title: "Downloadable PDF Report",
-                    desc: "Detailed strengths, weaknesses and improvement insights."
-                  },
-                  {
-                    image: analyticsImg,
-                    icon: <BsBarChart size={20} />,
-                    title: "History & Analytics",
-                    desc: "Track progress with performance graphs and topic analysis."
-                  }
-                ].map((item, index) => (
-                  <motion.div key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.02 }}
-                    className='bg-white border border-gray-200 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all'>
-                    <div className='flex flex-col md:flex-row items-center gap-8'>
-                      <div className='w-full md:w-1/2 flex justify-center'>
-                        <img src={item.image} alt={item.title} className='w-full h-auto object-contain max-h-64' />
-                      </div>
-
-                      <div className='w-full md:w-1/2'>
-                        <div className='bg-green-50 text-green-600 w-12 h-12 rounded-xl flex items-center justify-center mb-6'>
-                          {item.icon}
-                        </div>
-                        <h3 className='font-semibold mb-3 text-xl'>{item.title}</h3>
-                        <p className='text-gray-500 text-sm leading-relaxed'>{item.desc}</p>
-                      </div>
-
-                    </div>
-
-
-                  </motion.div>
-                ))
-              }
+              <div className="absolute inset-x-5 bottom-4 flex items-center justify-between rounded-[18px] border border-[#3c4054] bg-[#141729e8] px-5 py-4 backdrop-blur-md">
+                <div>
+                  <b className="block text-white">Great answer!</b>
+                  <span className="mt-2 block text-sm text-[#d3d5df]">You covered the key points.</span>
+                </div>
+                <strong className="grid h-[65px] w-[65px] place-items-center rounded-full border-[5px] border-[#3add99] border-l-[#4e83ff] border-b-[#4e83ff] text-lg text-white">
+                  87%
+                </strong>
+              </div>
             </div>
 
-
-          </div>
-
-          <div className='mb-32'>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className='text-4xl font-semibold text-center mb-16'>
-              Multiple Interview{" "}
-              <span className="text-green-600">Modes</span>
-
-            </motion.h2>
-
-            <div className='grid md:grid-cols-2 gap-10'>
-              {
-                [
-                  {
-                    img: hrImg,
-                    title: "HR Interview Mode",
-                    desc: "Behavioral and communication based evaluation."
-                  },
-                  {
-                    img: techImg,
-                    title: "Technical Mode",
-                    desc: "Deep technical questioning based on selected role."
-                  },
-
-                  {
-                    img: confidenceImg,
-                    title: "Confidence Detection",
-                    desc: "Basic tone and voice analysis insights."
-                  },
-                  {
-                    img: creditImg,
-                    title: "Credits System",
-                    desc: "Unlock premium interview sessions easily."
-                  }
-                ].map((mode, index) => (
-                  <motion.div key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ y: -6 }}
-                    className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all">
-
-                    <div className='flex items-center justify-between gap-6'>
-                      <div className="w-1/2">
-                        <h3 className="font-semibold text-xl mb-3">
-                          {mode.title}
-                        </h3>
-
-                        <p className="text-gray-500 text-sm leading-relaxed">
-                          {mode.desc}
-                        </p>
-                      </div>
-
-                      {/* RIGHT IMAGE */}
-                      <div className="w-1/2 flex justify-end">
-                        <img
-                          src={mode.img}
-                          alt={mode.title}
-                          className="w-28 h-28 object-contain"
-                        />
-                      </div>
-
-
-
-                    </div>
-
-
-                  </motion.div>
-                ))
-              }
+            <div className="absolute right-[-42px] top-[92px] flex items-center gap-3 rounded-[11px] border border-[#353850] bg-[#15192cde] px-4 py-3 text-sm text-white backdrop-blur-md">
+              <BsGraphUpArrow /> <span>Real-time Feedback</span>
             </div>
-
-
+            <div className="absolute right-[-42px] top-[156px] flex items-center gap-3 rounded-[11px] border border-[#353850] bg-[#15192cde] px-4 py-3 text-sm text-white backdrop-blur-md">
+              <BsMic /> <span>Voice Interaction</span>
+            </div>
+            <div className="absolute right-[-42px] top-[224px] flex items-center gap-3 rounded-[11px] border border-[#353850] bg-[#15192cde] px-4 py-3 text-sm text-white backdrop-blur-md">
+              <BsBarChart /> <span>Smart Analysis</span>
+            </div>
           </div>
+        </section>
 
-        </div>
-      </div>
+        <section className="mt-7 grid gap-5 rounded-[20px] border border-[#292d41] bg-[#10162a]/80 p-6 sm:grid-cols-2 xl:grid-cols-4">
+          {[
+            { icon: <BsPerson />, label: '10K+', text: 'Interviews Conducted', style: 'bg-gradient-to-br from-[#963dff] to-[#412aa9]' },
+            { icon: <BsTrophy />, label: '95%', text: 'Success Improvement', style: 'bg-gradient-to-br from-[#21d88f] to-[#097050]' },
+            { icon: <BsBarChart />, label: '50+', text: 'Roles Covered', style: 'bg-gradient-to-br from-[#3499ff] to-[#314bcb]' },
+            { icon: <BsStars />, label: '4.8/5', text: 'User Rating', style: 'bg-gradient-to-br from-[#ffb120] to-[#d86000]' },
+          ].map((item) => (
+            <div key={item.label} className="flex items-center gap-4 border-r-0 xl:border-r xl:border-[#2a2d41] xl:pr-5">
+              <i className={`grid h-[62px] w-[62px] place-items-center rounded-[15px] text-[30px] text-white ${item.style}`}>
+                {item.icon}
+              </i>
+              <p className="m-0">
+                <b className="block text-[22px] font-semibold text-white">{item.label}</b>
+                <span className="mt-1 block text-[12px] text-[#d3d5de]">{item.text}</span>
+              </p>
+            </div>
+          ))}
+        </section>
+
+        <SectionTitle>
+          Powerful <em className="not-italic bg-gradient-to-r from-[#ba42ff] to-[#407aff] bg-clip-text text-transparent">Features</em> to Ace Your Interview
+        </SectionTitle>
+
+        <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6  ">
+          {features.map((feature) => (
+            <FeatureCard key={feature.title} {...feature} />
+          ))}
+        </section>
+
+        <SectionTitle>
+          Multiple <em className="not-italic bg-gradient-to-r from-[#ba42ff] to-[#407aff] bg-clip-text text-transparent">Interview Modes</em>
+        </SectionTitle>
+
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {modes.map((mode) => (
+            <article key={mode.title} className="flex min-h-[240px] items-center gap-4 rounded-[15px] border border-[#292e45] bg-gradient-to-br from-[#11182c] to-[#0b1020] p-4">
+              <img src={mode.image} alt="" className="h-[130px] w-[250px] object-contain" />
+              <div>
+                <h3 className="mb-2 text-[19px] font-semibold text-white">{mode.title}</h3>
+                <p className="text-[14px] leading-6 text-[#bbc0cf]">{mode.text}</p>
+                <button
+                  className={`mt-4 inline-flex items-center gap-2 border-0 bg-transparent p-0 text-[13px] font-medium ${modeTextMap[mode.tone]}`}
+                  onClick={mode.title === 'Credit System' ? () => navigate('/pricing') : startInterview}
+                >
+                  {mode.action} <BsArrowRight />
+                </button>
+              </div>
+            </article>
+          ))}
+        </section>
+
+        <section className="mt-8 flex flex-col gap-5 rounded-[16px] border border-[#292e45] bg-gradient-to-br from-[#11182c] to-[#0b1020] p-5 md:flex-row md:items-center md:p-6">
+          <div className="text-5xl text-white"><BsStars /></div>
+          <div>
+            <h2 className="mb-2 text-[19px] font-semibold text-white">Ready to boost your interview skills?</h2>
+            <p className="max-w-[460px] text-[14px] leading-6 text-[#bbc0cf]">
+              Join thousands of candidates who are practicing smarter and getting hired faster with PrepAI.
+            </p>
+          </div>
+          <button
+            className="inline-flex items-center justify-center gap-3 rounded-xl border-0 bg-gradient-to-r from-[#8c21ed] to-[#4a8aff] px-5 py-4 text-sm font-semibold text-white md:ml-auto"
+            onClick={startInterview}
+          >
+            Start Your First Interview <BsArrowRight />
+          </button>
+        </section>
+      </main>
 
       {showAuth && <AuthModel onClose={() => setShowAuth(false)} />}
-
-        <Footer/>
-
+      <Footer />
     </div>
+  )
+}
+
+function SectionTitle({ children }) {
+  return <h2 className="mt-10 mb-6 text-center text-[23px] font-semibold tracking-[-0.04em] text-white">{children}</h2>
+}
+
+function FeatureCard({ icon, title, text, tone }) {
+  return (
+    <article className="rounded-[15px] border border-[#292e45] bg-gradient-to-br from-[#11182c] to-[#0b1020] p-5 text-center py-13 ">
+      <i className={`grid h-14 w-14 place-items-center rounded-[15px] text-[40px] ${toneMap[tone]} mx-auto`}>{icon}</i>
+      <h3 className="mt-4 text-[19px] font-semibold leading-6 text-white">{title}</h3>
+      <p className="mt-2 text-[14px] leading-6 text-[#bbc0cf]">{text}</p>
+    </article>
   )
 }
 
