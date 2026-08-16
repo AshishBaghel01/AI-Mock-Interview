@@ -182,7 +182,7 @@ function Step3Report({ report }) {
 
           <div>
             <h1 className='text-3xl font-bold flex-nowrap text-gray-800'>
-              nalytics Dashboard
+              Analytics Dashboard
             </h1>
             <p className='text-gray-500 mt-2'>
               AI-powered performance insights
