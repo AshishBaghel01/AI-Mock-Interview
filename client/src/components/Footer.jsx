@@ -38,7 +38,7 @@ function Footer() {
       transition={{ duration: 0.8 }}
       className='px-4 pb-4 pt-10 sm:px-6 lg:px-10'
     >
-      <div className='mx-auto grid max-w-[1500px] overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-950/55 px-5 py-5 shadow-[0_18px_45px_rgba(0,0,0,0.2)] backdrop-blur-sm sm:grid-cols-2 sm:px-7 lg:grid-cols-4 lg:py-5'>
+      <div className='mx-auto grid max-w-[1500px] overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-2xl backdrop-blur-sm sm:grid-cols-2 sm:px-7 lg:grid-cols-4 lg:py-5'>
         {highlights.map(({ title, description, icon: Icon, iconClass }, index) => (
           <div
             key={title}

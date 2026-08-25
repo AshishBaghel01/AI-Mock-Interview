@@ -42,7 +42,7 @@ function Navbar() {
 
   return (
     <header className="relative z-50 px-4 pt-5 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-[1500px] items-center justify-between rounded-2xl border border-white/10 bg-[#0b1020]/80 px-4 py-2.5 shadow-[0_18px_32px_rgba(2,6,23,0.5)] backdrop-blur-sm">
+      <div className="mx-auto flex max-w-[1500px] items-center justify-between rounded-2xl border border-white/20 bg-white/[0.08] px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-2xl">
         <button className="flex items-center gap-3 border-0 bg-transparent text-left text-white" onClick={() => navigate('/')}>
           <span className="text-[26px] text-[#a645ff]"><BsRobot /></span>
           <div>

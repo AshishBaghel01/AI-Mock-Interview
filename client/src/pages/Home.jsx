@@ -144,9 +144,9 @@ function Home() {
           </div>
         </section>
 
-        <section className="mt-7 grid gap-5 rounded-[20px] border border-[#292d41] bg-[#10162a]/80 p-6 sm:grid-cols-2 xl:grid-cols-4">
+        <section className="mt-7 grid gap-5 rounded-2xl border border-white/20 bg-white/[0.08] px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-2xl p-6 sm:grid-cols-2 xl:grid-cols-4">
           {[
-            { icon: <BsPerson />, label: '10K+', text: 'Interviews Conducted', style: 'bg-gradient-to-br from-[#963dff] to-[#412aa9]' },
+            { icon: <BsPerson />, label: '10k+', text: 'Interviews Conducted', style: 'bg-gradient-to-br from-[#963dff] to-[#412aa9]' },
             { icon: <BsTrophy />, label: '95%', text: 'Success Improvement', style: 'bg-gradient-to-br from-[#21d88f] to-[#097050]' },
             { icon: <BsBarChart />, label: '50+', text: 'Roles Covered', style: 'bg-gradient-to-br from-[#3499ff] to-[#314bcb]' },
             { icon: <BsStars />, label: '4.8/5', text: 'User Rating', style: 'bg-gradient-to-br from-[#ffb120] to-[#d86000]' },
@@ -179,7 +179,7 @@ function Home() {
 
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {modes.map((mode) => (
-            <article key={mode.title} className="flex min-h-[240px] items-center gap-4 rounded-[15px] border border-[#292e45] bg-gradient-to-br from-[#11182c] to-[#0b1020] p-4">
+            <article key={mode.title} className="flex min-h-[240px] items-center gap-4 rounded-2xl border border-white/20 bg-white/[0.08] px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-2xl p-4">
               <img src={mode.image} alt="" className="h-[130px] w-[250px] object-contain" />
               <div>
                 <h3 className="mb-2 text-[19px] font-semibold text-white">{mode.title}</h3>
@@ -195,7 +195,7 @@ function Home() {
           ))}
         </section>
 
-        <section className="mt-8 flex flex-col gap-5 rounded-[16px] border border-[#292e45] bg-gradient-to-br from-[#11182c] to-[#0b1020] p-5 md:flex-row md:items-center md:p-6">
+        <section className="mt-8 flex flex-col gap-5 rounded-2xl border border-white/20 bg-white/[0.08] px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-2xl p-5 md:flex-row md:items-center md:p-6">
           <div className="text-5xl text-white"><BsStars /></div>
           <div>
             <h2 className="mb-2 text-[19px] font-semibold text-white">Ready to boost your interview skills?</h2>
@@ -224,7 +224,7 @@ function SectionTitle({ children }) {
 
 function FeatureCard({ icon, title, text, tone }) {
   return (
-    <article className="rounded-[15px] border border-[#292e45] bg-gradient-to-br from-[#11182c] to-[#0b1020] p-5 text-center py-13 ">
+    <article className="rounded-2xl border border-white/20 bg-white/[0.08] px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-2xl p-5 text-center py-13 ">
       <i className={`grid h-14 w-14 place-items-center rounded-[15px] text-[40px] ${toneMap[tone]} mx-auto`}>{icon}</i>
       <h3 className="mt-4 text-[19px] font-semibold leading-6 text-white">{title}</h3>
       <p className="mt-2 text-[14px] leading-6 text-[#bbc0cf]">{text}</p>

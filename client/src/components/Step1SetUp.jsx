@@ -85,7 +85,7 @@ function Step1SetUp({ onStart }) {
                     initial={{ x: -80, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.7 }}
-                    className='relative bg-gradient-to-br from-[#313e64] to-[#0b1020] p-12 flex flex-col justify-center'>
+                    className='relative bg-gradient-to-br from-[#626363] to-[#0a247a] p-12 flex flex-col justify-center'>
 
                     <h2 className="text-4xl font-bold text-white  mb-6">
                         Start Your AI Interview
@@ -137,7 +137,7 @@ function Step1SetUp({ onStart }) {
                     initial={{ x: 80, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.7 }}
-                    className="p-12 bg-gradient-to-br from-[#0b1122] to-[#2b365c]">
+                    className="p-12 bg-gradient-to-br from-[#201e1e] to-[#2b365c]">
 
                     <h2 className='text-3xl font-bold text-gray-100 mb-8'>
                         Interview SetUp
